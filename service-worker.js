@@ -20,7 +20,6 @@ self.addEventListener('install', function(e) {
   e.waitUntil(
     caches.open(CACHE_NAME)
     .then(function(cache) {
-      console.log('installing cache : ' + CACHE_NAME)
       return cache.addAll(FILES_TO_CACHE);
     })
   );
@@ -38,7 +37,6 @@ self.addEventListener('activate', function(e) {
       return Promise.all(
         keyList.map(function(key, i) {
           if (cacheKeepList.indexOf(key) === -1) {
-            console.log('deleting cache : ' + keyList[i]);
             return caches.delete(keyList[i]);
           }
         })
@@ -48,15 +46,12 @@ self.addEventListener('activate', function(e) {
 });
 
 self.addEventListener('fetch', function(e) {
-  console.log('fetch request : ' + e.request.url);
   e.respondWith(
     caches.match(e.request)
     .then(function(request) {
       if (request) { // if cache is available, use it
-        console.log('responding with cache : ' + e.request.url);
         return request;
       } else { // no cache available, fetch it
-        console.log('file is not cached, fetching : ' + e.request.url);
         return fetch(e.request);
       }
 
