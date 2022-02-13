@@ -4,13 +4,13 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 
 module.exports = {
   entry: {
-    app: './assets/js/script.js',
-    events: './assets/js/events.js',
-    schedule: './assets/js/schedule.js',
-    tickets: './assets/js/tickets.js'
+    app: './public/assets/js/script.js',
+    events: './public/assets/js/events.js',
+    schedule: './public/assets/js/schedule.js',
+    tickets: './public/assets/js/tickets.js'
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, '/public/dist'),
     filename: '[name].bundle.js'
   },
   plugins: [
@@ -19,7 +19,7 @@ module.exports = {
       jQuery: "jquery"
     }),
     new BundleAnalyzerPlugin({
-      analyzerMode: "static", // the report outputs to an HTML file in the dist directory
+      analyzerMode: "disable", // the report outputs to an HTML file in the dist directory
     })
   ],
   module: {
